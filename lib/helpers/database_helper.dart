@@ -67,38 +67,159 @@ class DatabaseHelper {
   Future<void> _insertSampleData(Database db) async {
     // polling_station
     final stations = [
-      {'station_id': 101, 'station_name': 'โรงเรียนวัดพระมหาธาตุ', 'zone': 'เขต 1', 'province': 'นครศรีธรรมราช'},
-      {'station_id': 102, 'station_name': 'เต็นท์หน้าตลาดท่าวัง',  'zone': 'เขต 1', 'province': 'นครศรีธรรมราช'},
-      {'station_id': 103, 'station_name': 'ศาลากลางหมู่บ้านคีรีวง','zone': 'เขต 2', 'province': 'นครศรีธรรมราช'},
-      {'station_id': 104, 'station_name': 'หอประชุมอำเภอทุ่งสง',   'zone': 'เขต 3', 'province': 'นครศรีธรรมราช'},
-      {'station_id': 105, 'station_name': 'โรงเรียนเบญจมราชูทิศ',  'zone': 'เขต 1', 'province': 'นครศรีธรรมราช'},
-      {'station_id': 106, 'station_name': 'วัดพระธาตุน้อย',         'zone': 'เขต 2', 'province': 'นครศรีธรรมราช'},
+      {
+        'station_id': 101,
+        'station_name': 'โรงเรียนวัดพระมหาธาตุ',
+        'zone': 'เขต 1',
+        'province': 'นครศรีธรรมราช'
+      },
+      {
+        'station_id': 102,
+        'station_name': 'เต็นท์หน้าตลาดท่าวัง',
+        'zone': 'เขต 1',
+        'province': 'นครศรีธรรมราช'
+      },
+      {
+        'station_id': 103,
+        'station_name': 'ศาลากลางหมู่บ้านคีรีวง',
+        'zone': 'เขต 2',
+        'province': 'นครศรีธรรมราช'
+      },
+      {
+        'station_id': 104,
+        'station_name': 'หอประชุมอำเภอทุ่งสง',
+        'zone': 'เขต 3',
+        'province': 'นครศรีธรรมราช'
+      },
+      {
+        'station_id': 105,
+        'station_name': 'โรงเรียนเบญจมราชูทิศ',
+        'zone': 'เขต 1',
+        'province': 'นครศรีธรรมราช'
+      },
+      {
+        'station_id': 106,
+        'station_name': 'วัดพระธาตุน้อย',
+        'zone': 'เขต 2',
+        'province': 'นครศรีธรรมราช'
+      },
+      {
+        'station_id': 107,
+        'station_name': 'โรงเรียนสาธิตมหาวิทยาลัย',
+        'zone': 'เขต 3',
+        'province': 'นครศรีธรรมราช'
+      },
     ];
     for (final s in stations) {
-      await db.insert('polling_station', s, conflictAlgorithm: ConflictAlgorithm.ignore);
+      await db.insert('polling_station', s,
+          conflictAlgorithm: ConflictAlgorithm.ignore);
     }
 
     // violation_type
     final violations = [
-      {'type_id': 1, 'type_name': 'ซื้อสิทธิ์ขายเสียง (Buying Votes)',          'severity': 'High'},
-      {'type_id': 2, 'type_name': 'ขนคนไปลงคะแนน (Transportation)',              'severity': 'High'},
-      {'type_id': 3, 'type_name': 'หาเสียงเกินเวลา (Overtime Campaign)',          'severity': 'Medium'},
-      {'type_id': 4, 'type_name': 'ทำลายป้ายหาเสียง (Vandalism)',                'severity': 'Low'},
-      {'type_id': 5, 'type_name': 'เจ้าหน้าที่วางตัวไม่เป็นกลาง (Bias Official)', 'severity': 'High'},
+      {
+        'type_id': 1,
+        'type_name': 'ซื้อสิทธิ์ขายเสียง (Buying Votes)',
+        'severity': 'High'
+      },
+      {
+        'type_id': 2,
+        'type_name': 'ขนคนไปลงคะแนน (Transportation)',
+        'severity': 'High'
+      },
+      {
+        'type_id': 3,
+        'type_name': 'หาเสียงเกินเวลา (Overtime Campaign)',
+        'severity': 'Medium'
+      },
+      {
+        'type_id': 4,
+        'type_name': 'ทำลายป้ายหาเสียง (Vandalism)',
+        'severity': 'Low'
+      },
+      {
+        'type_id': 5,
+        'type_name': 'เจ้าหน้าที่วางตัวไม่เป็นกลาง (Bias Official)',
+        'severity': 'High'
+      },
     ];
     for (final v in violations) {
-      await db.insert('violation_type', v, conflictAlgorithm: ConflictAlgorithm.ignore);
+      await db.insert('violation_type', v,
+          conflictAlgorithm: ConflictAlgorithm.ignore);
     }
 
     // incident_report
     final incidents = [
-      {'station_id': 101, 'type_id': 1, 'reporter_name': 'พลเมืองดี 01', 'description': 'พบเห็นการแจกเงินบริเวณหน้าหน่วย',  'evidence_photo': null, 'timestamp': '2026-02-08 09:30:00', 'ai_result': 'Money',  'ai_confidence': 0.95},
-      {'station_id': 102, 'type_id': 3, 'reporter_name': 'สมชาย ใจกล้า', 'description': 'มีการเปิดรถแห่เสียงดังรบกวน',       'evidence_photo': null, 'timestamp': '2026-02-08 10:15:00', 'ai_result': 'Crowd',  'ai_confidence': 0.75},
-      {'station_id': 103, 'type_id': 5, 'reporter_name': 'Anonymous',     'description': 'เจ้าหน้าที่พูดจาชี้นำผู้ลงคะแนน',  'evidence_photo': null, 'timestamp': '2026-02-08 11:00:00', 'ai_result': null,     'ai_confidence': 0.0},
-      {'station_id': 104, 'type_id': 2, 'reporter_name': 'วิภา รักชาติ', 'description': 'พบรถหลายคันรับส่งผู้มาใช้สิทธิ์',  'evidence_photo': null, 'timestamp': '2026-02-08 11:45:00', 'ai_result': 'Car',    'ai_confidence': 0.88},
-      {'station_id': 101, 'type_id': 4, 'reporter_name': 'ประชา มั่นใจ', 'description': 'ป้ายหาเสียงถูกฉีกทำลาย',            'evidence_photo': null, 'timestamp': '2026-02-08 12:30:00', 'ai_result': 'Poster', 'ai_confidence': 0.62},
-      {'station_id': 105, 'type_id': 1, 'reporter_name': 'นิรนาม',       'description': 'มีคนแจกซองบริเวณด้านหลังหน่วย',     'evidence_photo': null, 'timestamp': '2026-02-08 13:00:00', 'ai_result': 'Money',  'ai_confidence': 0.91},
-      {'station_id': 106, 'type_id': 3, 'reporter_name': 'สุชาติ ดีงาม', 'description': 'รถหาเสียงวนซ้ำหลายรอบ',             'evidence_photo': null, 'timestamp': '2026-02-08 14:00:00', 'ai_result': 'Crowd',  'ai_confidence': 0.55},
+      {
+        'station_id': 101,
+        'type_id': 1,
+        'reporter_name': 'พลเมืองดี 01',
+        'description': 'พบเห็นการแจกเงินบริเวณหน้าหน่วย',
+        'evidence_photo': null,
+        'timestamp': '2026-02-08 09:30:00',
+        'ai_result': 'Money',
+        'ai_confidence': 0.95
+      },
+      {
+        'station_id': 102,
+        'type_id': 3,
+        'reporter_name': 'สมชาย ใจกล้า',
+        'description': 'มีการเปิดรถแห่เสียงดังรบกวน',
+        'evidence_photo': null,
+        'timestamp': '2026-02-08 10:15:00',
+        'ai_result': 'Crowd',
+        'ai_confidence': 0.75
+      },
+      {
+        'station_id': 103,
+        'type_id': 5,
+        'reporter_name': 'Anonymous',
+        'description': 'เจ้าหน้าที่พูดจาชี้นำผู้ลงคะแนน',
+        'evidence_photo': null,
+        'timestamp': '2026-02-08 11:00:00',
+        'ai_result': null,
+        'ai_confidence': 0.0
+      },
+      {
+        'station_id': 104,
+        'type_id': 2,
+        'reporter_name': 'วิภา รักชาติ',
+        'description': 'พบรถหลายคันรับส่งผู้มาใช้สิทธิ์',
+        'evidence_photo': null,
+        'timestamp': '2026-02-08 11:45:00',
+        'ai_result': 'Car',
+        'ai_confidence': 0.88
+      },
+      {
+        'station_id': 101,
+        'type_id': 4,
+        'reporter_name': 'ประชา มั่นใจ',
+        'description': 'ป้ายหาเสียงถูกฉีกทำลาย',
+        'evidence_photo': null,
+        'timestamp': '2026-02-08 12:30:00',
+        'ai_result': 'Poster',
+        'ai_confidence': 0.62
+      },
+      {
+        'station_id': 105,
+        'type_id': 1,
+        'reporter_name': 'นิรนาม',
+        'description': 'มีคนแจกซองบริเวณด้านหลังหน่วย',
+        'evidence_photo': null,
+        'timestamp': '2026-02-08 13:00:00',
+        'ai_result': 'Money',
+        'ai_confidence': 0.91
+      },
+      {
+        'station_id': 106,
+        'type_id': 3,
+        'reporter_name': 'สุชาติ ดีงาม',
+        'description': 'รถหาเสียงวนซ้ำหลายรอบ',
+        'evidence_photo': null,
+        'timestamp': '2026-02-08 14:00:00',
+        'ai_result': 'Crowd',
+        'ai_confidence': 0.55
+      },
     ];
     for (final i in incidents) {
       await db.insert('incident_report', i);
@@ -120,7 +241,8 @@ class DatabaseHelper {
   }
 
   // ─── incident_report ───────────────────────────────────────
-  Future<List<IncidentReport>> getAllIncidents({String? filterSeverity}) async {
+  Future<List<IncidentReport>> getAllIncidents(
+      {String? filterSeverity, String? filterZone}) async {
     final db = await database;
     String sql = '''
       SELECT ir.*, ps.station_name, ps.zone, vt.type_name, vt.severity
@@ -129,10 +251,19 @@ class DatabaseHelper {
       JOIN violation_type  vt ON ir.type_id    = vt.type_id
     ''';
     List<dynamic> args = [];
+    List<String> conditions = [];
     if (filterSeverity != null) {
-      sql += ' WHERE vt.severity = ?';
+      conditions.add('vt.severity = ?');
       args.add(filterSeverity);
     }
+    if (filterZone != null) {
+      conditions.add('ps.zone = ?');
+      args.add(filterZone);
+    }
+    if (conditions.isNotEmpty) {
+      sql += ' WHERE ${conditions.join(' AND ')}';
+    }
+
     sql += ' ORDER BY ir.timestamp DESC';
     final maps = await db.rawQuery(sql, args);
     return maps.map(IncidentReport.fromMap).toList();
@@ -168,13 +299,15 @@ class DatabaseHelper {
 
   Future<int> deleteIncident(int reportId) async {
     final db = await database;
-    return db.delete('incident_report', where: 'report_id = ?', whereArgs: [reportId]);
+    return db.delete('incident_report',
+        where: 'report_id = ?', whereArgs: [reportId]);
   }
 
   // ─── Stats ──────────────────────────────────────────────────
   Future<int> getIncidentCount() async {
     final db = await database;
-    final result = await db.rawQuery('SELECT COUNT(*) as count FROM incident_report');
+    final result =
+        await db.rawQuery('SELECT COUNT(*) as count FROM incident_report');
     return Sqflite.firstIntValue(result) ?? 0;
   }
 
@@ -214,8 +347,7 @@ class DatabaseHelper {
   Future<double> getAvgConfidence() async {
     final db = await database;
     final result = await db.rawQuery(
-      'SELECT AVG(ai_confidence) as avg FROM incident_report WHERE ai_confidence > 0'
-    );
+        'SELECT AVG(ai_confidence) as avg FROM incident_report WHERE ai_confidence > 0');
     return (result.first['avg'] as num?)?.toDouble() ?? 0.0;
   }
 }
